@@ -2,21 +2,24 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Sat Apr  8 22:51:25 2017
+# Generated: Sat Apr  8 19:17:17 2017
 ##################################################
 
+from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import gr
-from gnuradio import gr, blocks
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
 import osmosdr
+import time
+import thrift 
+from gnuradio import ctrlport
 
-class top_block(gr.top_block):
+class AAE490_top_block(gr.top_block):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Top Block")
+        gr.top_block.__init__(self, "AAE490 Top Block")
 
         ##################################################
         # Variables
@@ -28,7 +31,7 @@ class top_block(gr.top_block):
         ##################################################
         self.rtlsdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + "" )
         self.rtlsdr_source_0.set_sample_rate(samp_rate)
-        self.rtlsdr_source_0.set_center_freq(100e6, 0)
+        self.rtlsdr_source_0.set_center_freq(102.895e6, 0)
         self.rtlsdr_source_0.set_freq_corr(0, 0)
         self.rtlsdr_source_0.set_dc_offset_mode(0, 0)
         self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
@@ -38,14 +41,15 @@ class top_block(gr.top_block):
         self.rtlsdr_source_0.set_bb_gain(20, 0)
         self.rtlsdr_source_0.set_antenna("", 0)
         self.rtlsdr_source_0.set_bandwidth(0, 0)
-        datFile = open("testRecord.dat","wb+")  
-        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "../AAE490/testRecord.dat", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000000, "", False)
-        self.blocks_file_meta_sink_0.set_unbuffered(False)
+        
+	datFile = open("testRecord.dat","wb+")
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, "../AAE490/testRecord.dat", False)
+        self.blocks_file_sink_0.set_unbuffered(True)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.rtlsdr_source_0, 0), (self.blocks_file_meta_sink_0, 0))
+        self.connect((self.rtlsdr_source_0, 0), (self.blocks_file_sink_0, 0))
 
 
 
@@ -61,6 +65,7 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     if gr.enable_realtime_scheduling() != gr.RT_OK:
         print "Error: failed to enable realtime scheduling."
-    tb = top_block()
+    tb = AAE490_top_block()
     tb.start()
-    tb.wait()
+    tb.wait()	
+    tb.stop()
