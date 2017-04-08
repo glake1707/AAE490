@@ -15,7 +15,7 @@ from optparse import OptionParser
 import osmosdr
 import wx
 
-class top_block(grc_wxgui.top_block_gui):
+class top_block():
 
     def __init__(self):
         grc_wxgui.top_block_gui.__init__(self, title="Top Block")
