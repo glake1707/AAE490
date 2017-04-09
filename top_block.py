@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Sat Apr  8 22:51:25 2017
+# Generated: Sun Apr  9 20:43:14 2017
 ##################################################
 
 from gnuradio import eng_notation
@@ -28,7 +28,7 @@ class top_block(gr.top_block):
         ##################################################
         self.rtlsdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + "" )
         self.rtlsdr_source_0.set_sample_rate(samp_rate)
-        self.rtlsdr_source_0.set_center_freq(100e6, 0)
+        self.rtlsdr_source_0.set_center_freq(105.3e6, 0)
         self.rtlsdr_source_0.set_freq_corr(0, 0)
         self.rtlsdr_source_0.set_dc_offset_mode(0, 0)
         self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
@@ -38,8 +38,8 @@ class top_block(gr.top_block):
         self.rtlsdr_source_0.set_bb_gain(20, 0)
         self.rtlsdr_source_0.set_antenna("", 0)
         self.rtlsdr_source_0.set_bandwidth(0, 0)
-        datFile = open("testRecord.dat","wb+")  
-        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "../AAE490/testRecord.dat", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000000, "", False)
+        f = open("testRecord.dat", "wb+")       
+        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "testRecord.dat", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", True)
         self.blocks_file_meta_sink_0.set_unbuffered(False)
 
         ##################################################
@@ -63,4 +63,6 @@ if __name__ == '__main__':
         print "Error: failed to enable realtime scheduling."
     tb = top_block()
     tb.start()
+    raw_input('Press Enter to quit: ')
+    tb.stop()
     tb.wait()

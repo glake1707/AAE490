@@ -14,7 +14,7 @@ from optparse import OptionParser
 import osmosdr
 import time
 import thrift 
-from gnuradio import ctrlport
+
 
 class AAE490_top_block(gr.top_block):
 
