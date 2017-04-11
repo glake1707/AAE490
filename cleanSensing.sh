@@ -1,8 +1,8 @@
 !#/bin/bash
 cd ~
 cd /
-sudo rm testRecord.dat
-sudo rm testRecord.dat.hdr
+sudo rm *.dat
+sudo rm *.dat.hdr
 cd ~
 sudo rm startup.log
 

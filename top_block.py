@@ -21,14 +21,14 @@ class top_block(gr.top_block):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 3200000
+        self.samp_rate = samp_rate = 1000000
 
         ##################################################
         # Blocks
         ##################################################
         self.rtlsdr_source_0 = osmosdr.source( args="numchan=" + str(1) + " " + "" )
         self.rtlsdr_source_0.set_sample_rate(samp_rate)
-        self.rtlsdr_source_0.set_center_freq(105.3e6, 0)
+        self.rtlsdr_source_0.set_center_freq(262e6, 0)
         self.rtlsdr_source_0.set_freq_corr(0, 0)
         self.rtlsdr_source_0.set_dc_offset_mode(0, 0)
         self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
@@ -38,8 +38,9 @@ class top_block(gr.top_block):
         self.rtlsdr_source_0.set_bb_gain(20, 0)
         self.rtlsdr_source_0.set_antenna("", 0)
         self.rtlsdr_source_0.set_bandwidth(0, 0)
-        f = open("testRecord.dat", "wb+")       
-        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "testRecord.dat", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", True)
+        
+        f = open("testRecord3_1MHz.dat", "wb+")       
+        self.blocks_file_meta_sink_0 = blocks.file_meta_sink(gr.sizeof_gr_complex*1, "testRecord3_1MHz.dat", samp_rate, 1, blocks.GR_FILE_FLOAT, True, 1000000, "", True)
         self.blocks_file_meta_sink_0.set_unbuffered(False)
 
         ##################################################
