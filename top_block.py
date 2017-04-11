@@ -63,6 +63,4 @@ if __name__ == '__main__':
         print "Error: failed to enable realtime scheduling."
     tb = top_block()
     tb.start()
-    raw_input('Press Enter to quit: ')
-    tb.stop()
     tb.wait()

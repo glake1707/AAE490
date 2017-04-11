@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "starting relay..."
-python relay.py
-echo "resetting relay..."
-python relayReset.py
+echo "starting relay...\n"
+python /home/DBT490/AAE490/relay.py
+echo "resetting relay...\n"
+python /home/DBT490/AAE490/relayReset.py
+echo "relay off\n"
