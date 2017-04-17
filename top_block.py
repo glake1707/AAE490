@@ -11,8 +11,10 @@ from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
+from threads import timer
 import osmosdr
 import time
+import thread
 
 class top_block(gr.top_block):
 
@@ -24,6 +26,7 @@ class top_block(gr.top_block):
         ##################################################
         self.samp_rate = samp_rate = 3200000
         center_frequency = 262e6
+        tLimit = 2
         ##################################################
         # Blocks
         ##################################################
@@ -48,7 +51,7 @@ class top_block(gr.top_block):
         self.rtlsdr_source_0.set_iq_balance_mode(0, 0)
         self.rtlsdr_source_0.set_gain_mode(False, 0)
         self.rtlsdr_source_0.set_gain(10, 0)
-        self.rtlsdr_source_0.set_if_gain(20, 0)
+        self.rtlsdr_source_0.set_if_gain(20, 0)  
         self.rtlsdr_source_0.set_bb_gain(20, 0)
         self.rtlsdr_source_0.set_antenna("", 0)
         self.rtlsdr_source_0.set_bandwidth(0, 0)
@@ -86,4 +89,5 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     tb = top_block()
     tb.start()
-    tb.wait()
+    threadTimer = timer(10)
+    threadTimer.start()
