@@ -14,13 +14,14 @@
 #run scripts for AAE490 DBT sensor package at startup, record output in the startup log
 #all data recorded to be found in the root directory '/' log found in ~ directory
 
-touch /home/pi/startup.log
-chmod 777 /home/pi/startup.log
-echo "running rc.local" > /home/pi/startup.log
-sleep 1s                                                       #sleep to ensure all message are recorded in startup.log
-/home/pi/AAE490/relayScript.sh > /home/pi/startup.log &
-sleep 1s
-/home/pi/AAE490/sensorScript.sh > /home/pi/startup.log &
+touch /home/DBT490/startup.log
+chmod 777 /home/DBT490/startup.log
+echo "running rc.local" > /home/DBT490/startup.log
+python /home/DBT490/AAE490/buttonListener.py &
+#sleep 1s                                                       
+/home/DBT490/AAE490/relayScript.sh >> /home/DBT490/startup.log &
+#sleep 1s
+#/home/DBT490/AAE490/sensorScript.sh >> /home/DBT490/startup.log &
 
 # Print the IP address
 _IP=$(hostname -I) || true

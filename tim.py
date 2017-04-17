@@ -1,4 +1,3 @@
 import time
-
-t=time.localtime([tm_mon])
+t=time.asctime(time.localtime(time.time()))
 print t
