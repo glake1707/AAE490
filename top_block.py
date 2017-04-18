@@ -11,7 +11,7 @@ from gnuradio import gr
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
 from optparse import OptionParser
-from threads import timer
+from timingFunction import timer
 import osmosdr
 import time
 import thread
