@@ -57,8 +57,8 @@ class top_block(gr.top_block):
         self.rtlsdr_source_0.set_bandwidth(0, 0)
         t = time.asctime(time.localtime(time.time()))
         space = '_'
-        fName = t[0]+t[1]+t[2]+space+t[4]+t[5]+t[6]+space+t[8]+t[9]+space+t[11]+t[12]+t[13]+t[14]+t[15]+t[16]+t[17]+t[18]+space+t[20]+t[21]+t[22]+t[23]
-        fName = fName + space + "center_freq=" + repr(center_frequency)+ space + "samp_rate=" + repr(samp_rate) 
+        fName = t[0]+t[1]+t[2]+space+t[4]+t[5]+t[6]+space+t[8]+t[9]+space+t[11]+t[12]+space+t[14]+t[15]+space+t[17]+t[18]+space+t[20]+t[21]+t[22]+t[23]
+        fName = fName + space + "center_freq" + repr(center_frequency)+ space + "samp_rate" + repr(samp_rate) 
         f = open(fName, "wb+")       
         fName2 = fName + "_sdr2"
         f2 = open(fName2, "wb+")
@@ -89,5 +89,5 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     tb = top_block()
     tb.start()
-    threadTimer = timer(10)
+    threadTimer = timer(5)
     threadTimer.start()
